@@ -7,7 +7,6 @@ from nltk.corpus import wordnet as wn
 def rebort(filename):
     raw_datas = open(filename, 'r+')
     sentence = str(raw_datas.read())
-    # sentence = sentence0.lower()
     tokens = word_tokenize(sentence)
     counts = Counter(tokens)
     d = []
