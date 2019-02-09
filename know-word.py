@@ -29,10 +29,10 @@ def rebort(filename):
         if not yMatch and not zMatch:
             i = i + 1
             print(x)
-            datas.writelines(y + '\n')
-
-# print("unknow words number is",i)
+            # datas.writelines(y + '\n')
+            print("unknow words number is", i)
     datas.close()
+
 
 sentence = str(input("please input file directory \n>"))
 rebort(sentence)
