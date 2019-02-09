@@ -9,7 +9,7 @@ from nltk.tokenize import word_tokenize
 
 def rebort(filename):
     raw_datas = open(filename, 'r+')
-    sentence = str(raw_datas.read())
+    sentence = str(raw_datas.read()).lower()
     tokens = word_tokenize(sentence)
     counts = Counter(tokens)
     d = []
@@ -17,11 +17,8 @@ def rebort(filename):
     words = re.findall(r'[A-Za-z]+', str(d))
     datas = open('words.txt', 'r+')
     text = datas.read()
-
     snowball_stemmer = SnowballStemmer("english")
-
     i = 0
-    b = 0
     for x in words:
         y = str(wn.morphy(x))
         z = str(snowball_stemmer.stem(x))
@@ -35,11 +32,11 @@ def rebort(filename):
                     print(x)
             #     datas.writelines(x + '\n')
         except AttributeError as t:
-            fklasdi = 1  #这里不知道写些什么
+            fklasdi = 1  #i don't know write any code
         if not yMatch and not zMatch:
             i = i + 1
             print(x)
-            # datas.writelines(y + '\n')
+            # datas.writelines(y + '\t\t\t'+z+'\n')
     print("unknown words number is", i)
     datas.close()
 
