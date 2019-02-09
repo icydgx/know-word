@@ -30,7 +30,7 @@ def rebort(filename):
             i = i + 1
             print(x)
             # datas.writelines(y + '\n')
-            print("unknow words number is", i)
+    print("unknow words number is", i)
     datas.close()
 
 
