@@ -1,45 +1,39 @@
 #!/usr/bin/python
 import re
+import pysrt
 from collections import Counter
-
-from nltk.corpus import wordnet as wn
-from nltk.stem import SnowballStemmer
 from nltk.tokenize import word_tokenize
-
+from nltk.corpus import wordnet as wn
 
 def rebort(filename):
-    raw_datas = open(filename, 'r+')
-    sentence = str(raw_datas.read()).lower()
+    raw_datas= pysrt.open(filename)
+    sentence=''
+    for line in raw_datas:
+        sentence=sentence+str(line)
+    a=open('temp.txt', "r+")
+    a.seek(0)
+    a.truncate()   #清空文件
+    #sentence = str(raw_datas)
     tokens = word_tokenize(sentence)
     counts = Counter(tokens)
-    d = []
+    d = [] 
     d.append(counts)
     words = re.findall(r'[A-Za-z]+', str(d))
     datas = open('words.txt', 'r+')
     text = datas.read()
-    snowball_stemmer = SnowballStemmer("english")
-    i = 0
-    for x in words:
-        y = str(wn.morphy(x))
-        z = str(snowball_stemmer.stem(x))
-        yMatch = re.search(y, text)
-        zMatch = re.search(z, text)
-        try:
-            if yMatch.group() == "None":
-                dMatch = re.search(x, text)
-                if not dMatch:
-                    i = i + 1
-                    print(x)
-            #     datas.writelines(x + '\n')
-        except AttributeError as t:
-            fklasdi = 1  #i don't know write any code
-        if not yMatch and not zMatch:
-            i = i + 1
-            print(x)
-            # datas.writelines(y + '\t\t\t'+z+'\n')
-    print("unknown words number is", i)
-    datas.close()
 
+    i=0
+    for x in words:
+        y=str(wn.morphy(x))
+        myMatch = re.search(y, text)
+        if not(myMatch):
+            i=i+1
+            print(x)
+            a.writelines(x+'\n')
+#            datas.writelines(y + '\n')
+    print("unknow words number is",i)
+    a.close()
+    datas.close()
 
 sentence = str(input("please input file directory \n>"))
 rebort(sentence)
