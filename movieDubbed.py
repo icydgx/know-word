@@ -4,8 +4,7 @@ import pysrt
 import sys
 import argv
 
-# fileName= (argv.k(sys.argv[1:]))
-fileName='zm.srt'
+fileName= (argv.k(sys.argv[1:]))
 raw_datas= pysrt.open(fileName)
 sentence=''
 for line in raw_datas:
