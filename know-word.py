@@ -4,9 +4,11 @@ import pysrt
 from collections import Counter
 from nltk.tokenize import word_tokenize
 from nltk.corpus import wordnet as wn
+import sys
+import argv
 
-def rebort(filename):
-    raw_datas= pysrt.open(filename)
+def rebort(fileName):
+    raw_datas= pysrt.open(fileName)
     sentence=''
     for line in raw_datas:
         sentence=sentence+str(line)
@@ -24,16 +26,18 @@ def rebort(filename):
 
     i=0
     for x in words:
-        y=str(wn.morphy(x))
-        myMatch = re.search(y, text)
-        if not(myMatch):
-            i=i+1
-            print(x)
-            a.writelines(x+'\n')
+        xLower=x.lower()
+        firstMatch = re.search(xLower, text)
+        secondMatch=re.search(y,text)
+        if not(firstMatch):
+            if not (secondMatch): 
+                i=i+1
+                print(x)
+                a.writelines(x+'\n')
 #            datas.writelines(y + '\n')
     print("unknow words number is",i)
     a.close()
     datas.close()
 
-sentence = str(input("please input file directory \n>"))
-rebort(sentence)
+fileName= (argv.k(sys.argv[1:]))
+rebort(fileName)
